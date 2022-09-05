@@ -4,6 +4,7 @@ const port = 8000;
 
 
 //use express router
+//any request that comes in require the index.js of routes
 app.use('/', require('./routes'));
 
 
