@@ -20,7 +20,7 @@ app.set('view engine', 'ejs');
 app.set('views', './views');
 
 
-
+console.log('inside main index.js');
 app.listen(port, function(err){
     if(err){
         // console.log('Error', err);
