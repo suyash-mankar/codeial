@@ -10,6 +10,35 @@
                 <input type="submit" value="Post">
         </form>
 
+
+     
+        
+        <%# if(isAuthenticated) {  %> 
+   
+        <div class="posts-list-container">
+                <ul>
+
+                        <% for(let post of posts) { %> 
+                        
+                        <%# console.log(post.user.name); %>    
+                        <li class="post">
+                                
+                                <p> <%= post.content %>  </p>
+                                <p> <%= post.user.name %> </p>
+                                
+                        </li>
+                        
+                        <% }%> 
+        
+                </ul>
+        </div>
+      
+        <%# } %> 
+        
+
+
+
+
 </section>
         
 
