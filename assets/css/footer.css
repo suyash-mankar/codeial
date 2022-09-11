@@ -1,0 +1,14 @@
+footer {
+  background-color: grey;
+  display: flex;
+  color: white;
+  padding: 15px;
+  font-family: sans-serif; }
+  footer #nav-links {
+    display: flex;
+    flex-direction: column;
+    margin-left: 30px; }
+    footer #nav-links a {
+      color: white;
+      text-decoration: none;
+      margin-bottom: 5px; }
