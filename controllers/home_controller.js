@@ -2,52 +2,35 @@ const Post = require('../models/post');
 
 module.exports.home = function(req, res){
 
+    // Post.find({}, function(err, posts){
+    //     if(err){
+    //         console.log('error in finding posts from db');
+    //         return;
+    //     }
 
-
-    // if(!req.isAuthenticated()){
     //     return res.render('home', {
-    //         title: "Home Page",
-    //         isAuthenticated: req.isAuthenticated()
-            
+    //         title: "Codeial | Home",
+    //         posts: posts
     //     });
-    // }
-
-    // else{
-
-        // Post.find({user: req.user.id}, function(err, posts){
-        //     if(err){
-        //         console.log('error in fetching posts from db');
-        //         return;
-        //     }
-    
-        //     return res.render('home', {
-        //         title: "Codeial | Home",
-        //         name: req.user.name,
-        //         isAuthenticated: req.isAuthenticated(),
-        //         posts: posts
-        //     });
             
-        // }) 
+   
 
 
-        // Populate the user of each post
-        Post.find({}).populate('user').exec(function(err, posts){
-            if(err){
-                        console.log(err);
-                        return;
-                    }
+    // Populate the user of each post
+    Post.find({}).populate('user').exec(function(err, posts){
+        if(err){
+            console.log('error in finding posts from db');
+            return;
+        }
+        return res.render('home', {
+            title: "Codeial | Home",
+            posts: posts
+        });
+    })
 
-            
-            return res.render('home', {
-                title: "Codeial | Home",
-                // isAuthenticated: req.isAuthenticated(),
-                posts: posts
-            });
-        })
-
-    }
+}
 
 
 
-// }
+
 

@@ -5,22 +5,22 @@
 <section id="feed-posts">
 
         <h4>Posts</h4>
+
+        <% if(locals.user){ %> 
+
         <form action="/posts/create" id="new-post-form" method="POST">
                 <textarea name="content" cols="30" rows="3" placeholder="Type Here..."></textarea>
                 <input type="submit" value="Post">
         </form>
 
+        <% } %> 
 
-     
-        
-        <%# if(isAuthenticated) {  %> 
    
         <div class="posts-list-container">
                 <ul>
-
+                        
                         <% for(let post of posts) { %> 
                         
-                        <%# console.log(post.user.name); %>    
                         <li class="post">
                                 
                                 <p> <%= post.content %>  </p>
@@ -32,13 +32,9 @@
         
                 </ul>
         </div>
+
+       
       
-        <%# } %> 
-        
-
-
-
-
 </section>
         
 
