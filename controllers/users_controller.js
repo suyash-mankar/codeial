@@ -1,3 +1,4 @@
+const Post = require('../models/post');
 const User = require('../models/user')
 
 module.exports.profile = function(req, res){
@@ -76,4 +77,16 @@ module.exports.destroySession = function(req, res){
         }
     });
     return res.redirect('/');
+}
+
+
+module.exports.createPost = function(req, res){
+
+    Post.create(req.body,  function(err, post){
+        console.log('error crating post');
+        return;
+    });
+
+    res.redirect('back');
+
 }
