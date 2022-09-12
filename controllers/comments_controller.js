@@ -33,13 +33,13 @@ module.exports.destroy = function(req,res){
 
             let postId = comment.post;
             comment.remove();
-            // pull-out/delete the comment id from the list of comments (inbuilt function given by mongoose)
+            // pull-out/delete the comment id from the list of comments (inbuilt function given by mongoose)0
             Post.findByIdAndUpdate(postId, {$pull: {comments: req.params.id}}, function(err, post){
                 return res.redirect('back');
-            })
+            });
         }else{
             return res.redirect('back');
         }
-    })
+    });
 
 }
