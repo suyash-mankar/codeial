@@ -20,7 +20,7 @@
                 <ul>
                         
                         <% for(let post of posts) { %> 
-                        
+                                <!-- sending context {post: post} to partial -->
                                 <%- include('_post', {post: post}) %>  
 
                         <% }%> 
@@ -30,6 +30,19 @@
 
        
       
+</section>
+
+<section id="user-friends">
+
+        <h4>Friends</h4>
+        <% for(let u of all_users) {%>
+            
+                <p>
+                        <a href="/users/profile/<%=u.id%>"><%= u.name %> </a>
+                </p>
+
+        <% } %>
+
 </section>
         
 
