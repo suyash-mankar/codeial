@@ -15,11 +15,15 @@ module.exports.create = async function(req, res){
             });   
             post.comments.push(comment); 
             post.save();
+
+            req.flash('success', 'Comment published!');
+
             return res.redirect('/');   
         }
         
     }catch{
-        console.log('Error', err);
+        req.flash('error', err);
+        return res.redirect('back');
     }       
 }
 
@@ -35,14 +39,19 @@ module.exports.destroy = async function(req,res){
             comment.remove();
             // pull-out/delete the comment id from the list of comments (inbuilt function given by mongoose)0
             let post = await Post.findByIdAndUpdate(postId, {$pull: {comments: req.params.id}});
+
+            req.flash('success', 'Comment deleted!');
             return res.redirect('back');
             
         }else{
+
+            req.flash('error', 'Unauthorized');
             return res.redirect('back');
         }
 
     }catch{
-        console.log('Error', err);
+        req.flash('error', err);
+        return res.redirect('back');
     }
     
 
