@@ -91,15 +91,18 @@ module.exports.createSession = function(req,res){
 
 
 module.exports.destroySession = function(req, res){
+
+   
+
     //logout function given to req by passport js
     req.logout(function(err){
         if(err){
             return next(err);
         }
     });
-    
-    req.flash('success', 'You have logged out');
 
+    req.flash('success', 'You have logged out');
+    
     return res.redirect('/');
 }
 
