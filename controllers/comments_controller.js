@@ -12,16 +12,31 @@ module.exports.create = async function(req, res){
                 post: req.body.post,
                 user: req.user._id  
                 
-            });   
+            });  
+            
             post.comments.push(comment); 
             post.save();
+
+            await comment.populate('user');
+
+            if(req.xhr){
+
+                return res.status(200).json({
+                    data: {
+                        comment: comment
+                    },
+                    message: "Comment Created!"
+                });
+            }
+
+
 
             req.flash('success', 'Comment published!');
 
             return res.redirect('/');   
         }
         
-    }catch{
+    }catch(err){
         req.flash('error', err);
         return res.redirect('back');
     }       
@@ -40,6 +55,17 @@ module.exports.destroy = async function(req,res){
             // pull-out/delete the comment id from the list of comments (inbuilt function given by mongoose)0
             let post = await Post.findByIdAndUpdate(postId, {$pull: {comments: req.params.id}});
 
+
+            if(req.xhr){
+                return res.status(200).json({
+                    data: {
+                        comment_id: req.params.id
+                    },
+                    message: "Comment deleted"
+                });
+            }
+
+
             req.flash('success', 'Comment deleted!');
             return res.redirect('back');
             
@@ -49,7 +75,7 @@ module.exports.destroy = async function(req,res){
             return res.redirect('back');
         }
 
-    }catch{
+    }catch(err){
         req.flash('error', err);
         return res.redirect('back');
     }

@@ -7,6 +7,8 @@ module.exports.home = async function(req, res){
     try{
         // Populate the user of each post
         let posts = await Post.find({})
+        // to display the latest post at top after refreshing
+        .sort('-createdAt')
         .populate('user')
         .populate({
             path: 'comments',
@@ -15,6 +17,12 @@ module.exports.home = async function(req, res){
                 path: 'user'
             }
         });
+
+        for(let post of posts){
+            post.comments.sort(function (a, b) {
+                return b.createdAt - a.createdAt;
+            })
+        }
 
         let users = await User.find({});
 
