@@ -129,8 +129,6 @@
         let postId =  $(createLink).attr('postId');
 
         let newCommentForm = $(`#${postId}`);
-
-        console.log(postId);
         
         newCommentForm.submit(function(e){
 
@@ -220,9 +218,9 @@
     }
 
     let deleteCommentButtons = $('.delete-comment-button');
-        for(let deleteCommentButton of deleteCommentButtons){
-            deleteComment(deleteCommentButton);
-        }
+    for(let deleteCommentButton of deleteCommentButtons){
+        deleteComment(deleteCommentButton);
+    }
  
 }
 
