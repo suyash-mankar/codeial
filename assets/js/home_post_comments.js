@@ -25,7 +25,6 @@ class PostComments{
 
     createComment(postId){
         let pSelf = this;
-        console.log(pSelf);
         this.newCommentForm.submit(function(e){
             e.preventDefault();
             let self = this;
