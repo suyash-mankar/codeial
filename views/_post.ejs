@@ -17,16 +17,16 @@
     <div class="post-comments">
             <% if(locals.user){ %> 
     
-                    <form action="/comments/create" class="new-comment-form" id="<%=post._id%>" method="POST" required>
+                    <form action="/comments/create" id="post-<%=post._id%>-comments-form" method="POST" required>
                             <input type="text" name="content" placeholder="Type here to add comment...">
                             <input type="hidden" name="post" value="<%= post._id %>">
-                            <input type="submit" value="Add Comment" postId="<%=post._id%>" class="create-comment-button">
+                            <input type="submit" value="Add Comment">
                     </form>
     
             <% } %> 
 
             <div id="post-comments-list">
-                    <ul id="posts-comments-<%=post._id%>">
+                    <ul id="post-comments-<%=post._id%>">
                             
                             <% for (comment of post.comments){ %>
 
