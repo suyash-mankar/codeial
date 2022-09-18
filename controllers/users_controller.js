@@ -199,9 +199,6 @@ module.exports.createResetPasswordToken = async function(req, res){
 
 
 
-
-
-
 module.exports.resetPasswordPage = async function(req, res){
 
 
@@ -222,12 +219,7 @@ module.exports.resetPasswordPage = async function(req, res){
     }
 
     
-
 }
-
-
-
-
 
 
 
