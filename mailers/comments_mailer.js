@@ -1,7 +1,7 @@
 const nodemailer = require('../config/nodemailer');
 
 
-//create a function to send the mail
+// Create a function to send the mail
 
 //  This is another way of exporting a method
 exports.newComment = (comment) => {
@@ -18,7 +18,7 @@ exports.newComment = (comment) => {
             console.log('Error in sending mail', err);
             return;
         }
-        console.log('Mail delivered', info);
+        // console.log('Mail delivered', info);
         return;
     });
             
