@@ -28,7 +28,6 @@ class PostComments{
         this.newCommentForm.submit(function(e){
             e.preventDefault();
             let self = this;
-            console.log(self);
 
             $.ajax({
                 type: 'post',
@@ -39,6 +38,10 @@ class PostComments{
                     $(`#post-comments-${postId}`).prepend(newComment);
                     pSelf.deleteComment($(' .delete-comment-button', newComment));
 
+                    // enable the functionality of the toggle like button on the new comment
+                    new ToggleLike($(' .toggle-like-button', newComment));
+
+                    
                     new Noty({
                         theme: 'relax',
                         text: "Comment published!",
@@ -72,6 +75,12 @@ class PostComments{
                             <small>
                                 ${comment.user.name}
                             </small>
+                            <br>
+                            <small>
+                                <a href="/likes/toggle?id=${comment._id}&type=Comment" class="toggle-like-button" data-likes="0">
+                                        0 Likes     
+                                </a>
+                             </small>
                         </p>    
 
                 </li>`);

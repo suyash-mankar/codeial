@@ -10,13 +10,17 @@ module.exports.home = async function(req, res){
         // to display the latest post at top after refreshing
         .sort('-createdAt')
         .populate('user')
+        // Also populate the likes of each post and comment
         .populate({
             path: 'comments',
             // further populate
             populate: {
                 path: 'user'
+            },
+            populate: {
+                path: 'likes'
             }
-        });
+        }).populate('likes');
 
         for(let post of posts){
             post.comments.sort(function (a, b) {

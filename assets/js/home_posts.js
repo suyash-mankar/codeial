@@ -18,10 +18,14 @@
                     noty(notyText);
                     deletePost($(' .delete-post-button', newPost));
                     
-                    // call the comment class
+                    // call the create comment class
                     new PostComments(data.data.post._id);
 
 
+                    // enable the functionality of the toggle like button on the new post
+                    new ToggleLike($(' .toggle-like-button', newPost));
+                
+                
                 }, error: function(error){
                     let notyText = error.responseText;
                     noty(notyText);
@@ -47,7 +51,16 @@
             ${post.content}
             <br>
             <small> ${post.user.name} </small>
+            <br>
+
+            <small>
+                <a href="/likes/toggle?id=${post._id}&type=Post" class="toggle-like-button" data-likes="0">
+                        0 Likes     
+                </a>
+            </small>
+
         </p>
+        
         
     
         <div class="post-comments">
@@ -84,6 +97,7 @@
                 url: $(deleteLink).prop('href'),
                 success: function(data){
                     $(`#post-${data.data.post_id}`).remove();
+
                     let notyText = "Post Deleted";
                     noty(notyText);
                 }, error : function(error){

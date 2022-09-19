@@ -3,6 +3,7 @@ const Post = require('../models/post');
 const commentsMailer = require('../mailers/comments_mailer');
 const queue = require('../config/kue');
 const commentEmailWorker = require('../workers/comment_email_worker');
+const Like = require('../models/like');
 
 
 module.exports.create = async function(req, res){
@@ -67,11 +68,17 @@ module.exports.destroy = async function(req,res){
         if(comment.user == req.user.id){
 
             let postId = comment.post;
+
+            // destroy the associated likes for this comment
+            await Like.deleteMany({likeable: comment._id, onModel: 'Comment'});
+
             comment.remove();
             // pull-out/delete the comment id from the list of comments (inbuilt function given by mongoose)0
             let post = await Post.findByIdAndUpdate(postId, {$pull: {comments: req.params.id}});
 
+            
 
+           // send the comment id which was deleted back to the views
             if(req.xhr){
                 return res.status(200).json({
                     data: {
@@ -93,7 +100,7 @@ module.exports.destroy = async function(req,res){
 
     }catch(err){
         req.flash('error', err);
-        return res.redirect('back');
+        return;
     }
     
 

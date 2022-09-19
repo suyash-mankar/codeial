@@ -6,7 +6,7 @@ const Comment = require('../models/comment');
 module.exports.toggleLike = async function(req, res){
     try{
 
-        // likes/toggle/?id=abcdef&type=Post
+        // the post req which will come will be like this - likes/toggle/?id=abcdef&type=Post
         let likeable;
         let deleted = false;
 
@@ -23,14 +23,17 @@ module.exports.toggleLike = async function(req, res){
         let existingLike = await Like.findOne({
             likeable: req.query.id,
             onModel: req.query.type,
+            // user = user who is logged in
             user: req.user._id
         })
 
         // if a like already exists then delete it
         if(existingLike){
+
+            // delete it from the likeable(Post or Comment) array also
             likeable.likes.pull(existingLike._id);
             likeable.save();
-
+           
             existingLike.remove();
             deleted = true;
 
@@ -43,12 +46,14 @@ module.exports.toggleLike = async function(req, res){
                 onModel: req.query.type
             });
 
+            
+            // push the newly created like into the likeable(Post or Comment) array
             likeable.likes.push(newLike._id);
             likeable.save();
 
         }
 
-
+        // send this json response to toggle_likes.js
         return res.json(200,{
             message: "Request Successfull!",
             data: {
