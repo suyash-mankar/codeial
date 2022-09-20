@@ -40,16 +40,18 @@
 
                         <% if(locals.user){ %> 
 
-
-                                <% for(let u of signedIn_user.friendships) {%>
-
+                                <!-- friendships array come from home_controller -->
+                                <% for(let u of friendships) {%>
+                                        <!-- if the logged in user received the friend request -->
                                         <% if(locals.user.id==u.to_user._id){ %>
                                                 <p>
+                                                        <!-- show the name of the person to who sent the request -->
                                                         <a href="/users/profile/<%=u.from_user._id%>">  <%= u.from_user.name %> </a>
                                                 </p>
                                         <%}else{%>
-                                        
+                                        <!-- if the logged in user sent the friend request -->
                                                 <p>
+                                                        <!-- show the name of the person to whom request was sent -->
                                                         <a href="/users/profile/<%=u.to_user._id%>"> <%= u.to_user.name %> </a>
                                                 </p>
                                         <%}%>

@@ -9,22 +9,32 @@ const Friendship = require('../models/friendship');
 
 module.exports.profile = async function(req, res){
 
-    // if users are not friends, hen show "Add Friend"
-    let friendship_status = "Add Friend";
+    // find friendship to check if the users are friends or not
+    // friendship will return an array
+    let friendship = await Friendship.find({
+        $or: [
+            {
+                // if the logged in user has sent the friend request
+                from_user: req.user.id,
+                to_user: req.params.id
+            },
+            {
+                // if the user whose profile page we are on had sent the friend request
+                from_user: req.params.id,
+                to_user: req.user.id
+            },
+        ],
+    })
 
+    // variable to decide wheather to show 'Add Friend' or 'Remove Friend' in profile page
+    let friendship_status;
 
-    let friendshipOneSide = await Friendship.findOne({
-        from_user: req.user.id,
-        to_user: req.params.id
-    });
-
-    let friendshipAnotherSide = await Friendship.findOne({
-        from_user: req.params.id,
-        to_user: req.user.id
-    });
-
-    if(friendshipOneSide || friendshipAnotherSide){
-        // if users are already friends, hen show "Remove Friend"
+    // if no friendship found
+    if(friendship.length==0){
+        // if users are not friends, then show "Remove Friend"
+        friendship_status = "Add Friend";
+    }else{
+        // else if users are already friends, then show "Add Friend"
         friendship_status = "Remove Friend";
     }
     

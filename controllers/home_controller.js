@@ -32,32 +32,40 @@ module.exports.home = async function(req, res){
 
         let users = await User.find({});
 
+        let friendships = [];
 
+        // if the user is logged in
         if(req.user){
 
-            let signedIn_user = await req.user.populate('friendships');
+            // query to further populate 'to_user' and 'from_user' in 'friendships'
+            let query = [
+                {
+                    path: "to_user",
+                },
+                {
+                    path: "from_user",
+                },
+            ];
 
-            for(let friendship of signedIn_user.friendships){
-                await friendship.populate('to_user')
-                await friendship.populate('from_user')
-            }
-
-            return res.render('home', {
-                title: "Codeial | Home",
-                posts: posts,
-                all_users: users,
-                signedIn_user: signedIn_user
+            // populate the 'friendship field', 'to_user' and 'from_user field' of signed in user 
+            let signedIn_user = await req.user.populate({
+                path: 'friendships',
+                populate: query
             });
+
+            // Logged i user friendships array (send it to home page to display logged in user's friends)
+            friendships = signedIn_user.friendships
+               
         }
 
 
-        else{
-            return res.render('home', {
-                title: "Codeial | Home",
-                posts: posts,
-                all_users: users,
-            });
-        }
+        return res.render('home', {
+            title: "Codeial | Home",
+            posts: posts,
+            all_users: users,
+            friendships: friendships
+        });
+
         
 
     }catch(err){

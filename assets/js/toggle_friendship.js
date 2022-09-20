@@ -4,10 +4,7 @@ let toggleFriendship = function(){
 
         e.preventDefault();
 
-        let friendshipStatus = ($('.toggle-friendship').attr('data-friendship-status'));
-
-
-        // send a POST ajax request to controller via the route
+        // send a POST ajax request to friendship_controller via the route
         $.ajax({
             type: 'POST',
             url: $('.toggle-friendship').attr('href'),
@@ -21,7 +18,7 @@ let toggleFriendship = function(){
                 friendshipStatus = "Add Friend";
             }
 
-            $('.toggle-friendship').attr('data-friendship-status', friendshipStatus);
+            // dynamically change the html text of "Add Friend/Remove Friend"
             $('.toggle-friendship').html(friendshipStatus);   
 
 
@@ -36,6 +33,7 @@ let toggleFriendship = function(){
 
 }
 
+// call the toggleFriendship function
 toggleFriendship();
 
 
