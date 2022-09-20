@@ -1,6 +1,8 @@
 const Post = require('../models/post');
 const Comment = require('../models/comment');
 const User = require('../models/user');
+const Friendship = require('../models/friendship');
+const { post } = require('../routes');
 
 module.exports.home = async function(req, res){
        
@@ -30,11 +32,33 @@ module.exports.home = async function(req, res){
 
         let users = await User.find({});
 
-        return res.render('home', {
-            title: "Codeial | Home",
-            posts: posts,
-            all_users: users
-        });
+
+        if(req.user){
+
+            let signedIn_user = await req.user.populate('friendships');
+
+            for(let friendship of signedIn_user.friendships){
+                await friendship.populate('to_user')
+                await friendship.populate('from_user')
+            }
+
+            return res.render('home', {
+                title: "Codeial | Home",
+                posts: posts,
+                all_users: users,
+                signedIn_user: signedIn_user
+            });
+        }
+
+
+        else{
+            return res.render('home', {
+                title: "Codeial | Home",
+                posts: posts,
+                all_users: users,
+            });
+        }
+        
 
     }catch(err){
         console.log('Error', err);

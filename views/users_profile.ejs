@@ -23,4 +23,12 @@
                 <p><%= profile_user.name %> </p>
                 <p><%= profile_user.email %> </p>
 
+
+                <a href="/friendship/toggle/?profileId=<%=profile_user.id%>" class="toggle-friendship" data-friendship-status="<%= friendship_status %> "> <%= friendship_status %>  </a>
+
+
+
         <% } %>
+
+
+        <script src="/js/toggle_friendship.js"></script>

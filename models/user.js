@@ -4,8 +4,6 @@ const multer = require('multer');
 const path = require('path');
 const AVATAR_PATH = path.join('/uploads/users/avatars')
 
-
-
 const userSchema = new mongoose.Schema({
     email: {
         type: String,
@@ -21,9 +19,15 @@ const userSchema = new mongoose.Schema({
         required: true
     },
     avatar: {
-        type: String
+        type: String,
 
-    }
+    }, 
+    friendships: [
+        { 
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Friendship' 
+        }
+    ]
 }, {
     //crated at and updated at what time/date
     timestamps: true

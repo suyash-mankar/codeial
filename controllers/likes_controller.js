@@ -54,7 +54,7 @@ module.exports.toggleLike = async function(req, res){
         }
 
         // send this json response to toggle_likes.js
-        return res.json(200,{
+        return res.status(200).json({
             message: "Request Successfull!",
             data: {
                 deleted: deleted
@@ -65,7 +65,7 @@ module.exports.toggleLike = async function(req, res){
 
     }catch(err){
         console.log(err);
-        return res.json(500, {
+        return res.status(500).json({
             message: 'Internal Server Error'
         });
     }

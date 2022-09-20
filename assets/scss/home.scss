@@ -7,10 +7,23 @@
         padding: 10px;
     }
 
-    #user-friends{
+    #users-friends{
         width: 30%;
-        padding: 10px;
         border-left: 1px solid lightgrey;
+
+        h4, p{
+            margin-left: 10px;
+        }
+
+        #friends{
+            height: 50%;
+            border-bottom: 1px solid lightgrey;   
+        }
+
+
+        #users{
+            height: 50%;
+        }
        
     }
 }

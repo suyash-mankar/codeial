@@ -30,19 +30,55 @@
                
               
         </section>
+
+
+        <section id="users-friends">
+
+                <div id="friends">
         
-        <section id="user-friends">
+                        <h4>Friends</h4>
+
+                        <% if(locals.user){ %> 
+
+
+                                <% for(let u of signedIn_user.friendships) {%>
+
+                                        <% if(locals.user.id==u.to_user._id){ %>
+                                                <p>
+                                                        <a href="/users/profile/<%=u.from_user._id%>">  <%= u.from_user.name %> </a>
+                                                </p>
+                                        <%}else{%>
+                                        
+                                                <p>
+                                                        <a href="/users/profile/<%=u.to_user._id%>"> <%= u.to_user.name %> </a>
+                                                </p>
+                                        <%}%>
+                        
+                                <% } %> 
+
+                        <% } %> 
+                
+                </div>
+
+                <div id="users">
         
-                <h4>Friends</h4>
-                <% for(let u of all_users) {%>
-                    
-                        <p>
-                                <a href="/users/profile/<%=u.id%>"><%= u.name %> </a>
-                        </p>
-        
-                <% } %>
-        
+                        <h4>All Users</h4>
+                        <% for(let u of all_users) {%>
+                            
+                                <p>
+                                        <a href="/users/profile/<%=u.id%>"><%= u.name %> </a>
+                                </p>
+                
+                        <% } %>
+                
+                </div>
+
+
+
+
         </section>
+        
+        
 </div>
 
 <script src="/js/home_post_comments.js" ></script>
