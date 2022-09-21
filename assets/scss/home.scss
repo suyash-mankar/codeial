@@ -1,9 +1,9 @@
 #home-container{
     display: flex;
     height: 100%;
-
     #feed-posts{
         width: 70%;
+        height: 80%;
         padding: 10px;
     }
 
@@ -16,15 +16,27 @@
         }
 
         #friends{
-            height: 50%;
             border-bottom: 1px solid lightgrey;   
         }
 
 
-        #users{
-            height: 50%;
-        }
+        
        
     }
 }
 
+// #home-container{
+//     display: flex;
+    
+//     #feed-posts{
+//         width: 70%;
+//         padding: 10px;
+//     }
+
+//     #users-friends{
+//         width: 30%;
+//         padding: 10px;
+//         border-left: 1px solid lightgrey;
+//         height: 100%;
+//     }
+// }
