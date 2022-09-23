@@ -28,8 +28,8 @@ console.log('chat server is listening on port 5000');
 const path = require('path');
 
 app.use(sassMiddleware({
-    src: path.join(__dirname, env.asset_path, 'scss'),
-    dest: path.join(__dirname, env.asset_path, 'css'),
+    src: path.join(__dirname, env.asset_path, '/scss'),
+    dest: path.join(__dirname, env.asset_path, '/css'),
     debug: true,
     outoutStyle: 'extended',
     prefix: '/css'
@@ -38,7 +38,6 @@ app.use(sassMiddleware({
 app.use(bodyParser.urlencoded({extended:false}));
 
 app.use(cookieParser());
-
 app.use(express.static(env.asset_path));
 
 // make the uploads path available to the browser
