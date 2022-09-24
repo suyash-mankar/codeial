@@ -1,0 +1,24 @@
+header {
+  font-family: sans-serif;
+  background-color: #1286F7;
+  display: flex;
+  justify-content: space-between;
+  align-items: center; }
+  header a {
+    color: white;
+    text-decoration: none; }
+  header h1 {
+    margin: 0;
+    margin-left: 20px;
+    color: white; }
+  header ul {
+    list-style: none;
+    display: flex;
+    margin: 10px; }
+    header ul li {
+      margin: 0 10px;
+      display: flex; }
+      header ul li a {
+        color: white;
+        font-size: 1.3rem;
+        text-decoration: none; }
