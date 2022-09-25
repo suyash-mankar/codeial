@@ -10,7 +10,7 @@ const imagemin = require('gulp-imagemin');
 const del = require('del'); 
 
 
-gulp.task('css', function(){
+gulp.task('css', function(done){
     console.log('minifying css...');
     // ** means any folder and every sub-folder inside sass and * means any file name .scss
     gulp.src('./assets/sass/**/*.scss')
@@ -19,7 +19,7 @@ gulp.task('css', function(){
     .pipe(gulp.dest('./assets/css'));
 
     // any folder or subfolder inside it which contains a css file
-    return gulp.src('./assets/**/*.css')
+    gulp.src('./assets/**/*.css')
     .pipe(rev())
     .pipe(gulp.dest('./public/assets'))
     .pipe(rev.manifest({
@@ -27,13 +27,14 @@ gulp.task('css', function(){
         merge: true
     }))
     .pipe(gulp.dest('./public/assets'));
+    done();
 });
 
 
 
 gulp.task('js', function(done){
     console.log('minifying js...');
-    gulp.src('./assets**/*.js')
+    gulp.src('./assets/**/*.js')
     .pipe(uglify())
     .pipe(rev())
     .pipe(gulp.dest('./public/assets'))
@@ -49,7 +50,7 @@ gulp.task('js', function(done){
 
 gulp.task('images', function(done){
     console.log('compressing images...');
-    gulp.src('./assets**/*.+(png|jpg|gif|svg|jpeg')
+    gulp.src('./assets/**/*.+(png|jpg|gif|svg|jpeg')
     .pipe(imagemin())
     .pipe(rev())
     .pipe(gulp.dest('./public/assets'))

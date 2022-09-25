@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="/css/home.css">
+<link rel="stylesheet" href="<%= assetPath('css/home.css') %>">
 
 <div id="home-container">
         <section id="feed-posts">
@@ -87,9 +87,9 @@
 
 
 
-<script src="/js/home_post_comments.js" ></script>
-<script src="/js/home_posts.js"></script>
-<script src="/js/toggle_likes.js"></script>
+<script src="<%= assetPath('js/home_post_comments.js') %>" ></script>
+<script src="<%= assetPath('js/home_posts.js') %>"></script>
+<script src="<%= assetPath('js/toggle_likes.js') %>"></script>
 
 <!-- for already presend toggle-like-buttons -->
 <script>
@@ -102,7 +102,7 @@
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.2/socket.io.js" integrity="sha512-VJ6+sp2E5rFQk05caiXXzQd1wBABpjEj1r5kMiLmGAAgwPItw1YpqsCCBtq8Yr1x6C49/mTpRdXtq8O2RcZhlQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="/js/chat_engine.js"></script>
+<script src="<%= assetPath('js/chat_engine.js') %>"></script>
 
 <% if (locals.user) { %>
         <script>
