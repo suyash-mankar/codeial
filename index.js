@@ -114,5 +114,5 @@ const server = app.listen(port, function(err){
 // setup the chat server to be used with socket.io
 // const chatServer = require('http').createServer(app);
 const chatSockets = require('./config/chat_sockets').chatSockets(server);
-// chatServer.listen(5000);
 console.log('chat server is listening on port 8000');
+
