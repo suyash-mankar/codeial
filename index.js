@@ -22,11 +22,7 @@ const sassMiddleware = require('node-sass-middleware');
 const flash = require('connect-flash');
 const customMware = require('./config/middleware');
 
-// setup the chat server to be used with socket.io
-const chatServer = require('http').Server(app);
-const chatSockets = require('./config/chat_sockets').chatSockets(chatServer);
-chatServer.listen(5000);
-console.log('chat server is listening on port 5000');
+
 
 const path = require('path');
 
@@ -105,7 +101,7 @@ app.use('/', require('./routes'));
 
 
 
-app.listen(port, function(err){
+const server = app.listen(port, function(err){
     if(err){
         // console.log('Error', err);
         console.log(`Error in running the server: ${err}`); //Interpolation
@@ -113,3 +109,10 @@ app.listen(port, function(err){
     console.log(`server is running on port: ${port}`);
 
 })
+
+
+// setup the chat server to be used with socket.io
+// const chatServer = require('http').createServer(app);
+const chatSockets = require('./config/chat_sockets').chatSockets(server);
+// chatServer.listen(5000);
+console.log('chat server is listening on port 8000');
