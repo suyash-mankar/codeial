@@ -23,7 +23,7 @@ const development = {
         port: 587,
         secure: false,
         auth: {
-            user: 'suyashmankar9@gmail.com',
+            user: '',
             pass: 'tmmfqznubxldnnpk' // get this from google account
         }
     },
