@@ -9,7 +9,7 @@ exports.resetPassword = (resetPasswordToken) => {
     let htmlString = nodemailer.renderTemplate({resetPasswordToken: resetPasswordToken}, '/reset_password/reset_password.ejs');
 
     nodemailer.transporter.sendMail({
-        from: 'suyashmankar9@gmail.com',
+        from: 'facebooklite.tech@gmail.com',
         to: resetPasswordToken.user.email,
         subject: "Reset your password",
         html: htmlString

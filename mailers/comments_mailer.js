@@ -9,7 +9,7 @@
 //     let htmlString = nodemailer.renderTemplate({comment: comment}, '/comments/new_comment.ejs');
 
 //     nodemailer.transporter.sendMail({
-//         from: '',
+//         from: 'facebooklite.tech@gmail.com',
 //         to: comment.user.email,
 //         subject: "new comment published",
 //         html: htmlString

@@ -23,8 +23,8 @@ const development = {
         port: 587,
         secure: false,
         auth: {
-            user: '',
-            pass: 'tmmfqznubxldnnpk' // get this from google account
+            user: 'facebooklite.tech@gmail.com',
+            pass: 'fzbtuxxaofbhyeea' // get this from google account
         }
     },
     google_client_id: "555662117399-hpj435qat8reu1t626l6umqm4eusnui7.apps.googleusercontent.com",

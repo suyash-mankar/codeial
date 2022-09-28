@@ -2,9 +2,18 @@ const express = require('express');
 const env = require('./config/environment');
 const logger = require('morgan');
 
+const https = require('https');
+const fs = require('fs');
+const options = {
+    key: fs.readFileSync('facecopy.tech.key'),
+    cert: fs.readFileSync('facecopy.tech.cert')
+  };
+
+
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const app= express();
+
 require('./config/view-helpers')(app);
 const port = 8000;
 const expressLayouts = require('express-ejs-layouts');
@@ -101,7 +110,11 @@ app.use('/', require('./routes'));
 
 
 
-const server = app.listen(port, function(err){
+
+
+const server = https.createServer(options, app);
+
+server.listen(port, function(err){
     if(err){
         // console.log('Error', err);
         console.log(`Error in running the server: ${err}`); //Interpolation
@@ -109,6 +122,17 @@ const server = app.listen(port, function(err){
     console.log(`server is running on port: ${port}`);
 
 })
+
+
+
+// const server = app.listen(port, function(err){
+//     if(err){
+//         // console.log('Error', err);
+//         console.log(`Error in running the server: ${err}`); //Interpolation
+//     }
+//     console.log(`server is running on port: ${port}`);
+
+// })
 
 
 // setup the chat server to be used with socket.io
