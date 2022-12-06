@@ -1,57 +1,54 @@
 <li id="post-<%= post._id %>">
-                                
-    <p>     
-            <!-- if the user is signed in and if the user which is signed in is equal to the user who created the post -->
-            <% if(locals.user && locals.user.id == post.user.id){ %> 
-                    <small>
-                            <!-- ._id is same as .id (.id just converts the _id into string by mongoose)  -->
-                            <a class="delete-post-button" href="/posts/destroy/<%=post._id%>"> X </a>
-                    </small>
-            <% } %> 
-            <%= post.content %>  
-            <br>
-            <small> <%= post.user.name %> </small>
-            <br>
-            <!-- display the likes of this post, if the user is logged in, then show the link to toggle likes, else, just show the count --> 
-            <small>
-                <% if (locals.user) { %>
-                        <a href="/likes/toggle?id=<%=post._id%>&type=Post" class="toggle-like-button" data-likes="<%= post.likes.length %>">
-                                <%= post.likes.length %> Likes     
-                        </a>
+  <p>
+    <!-- if the user is signed in and if the user which is signed in is equal to the user who created the post -->
+    <% if(locals.user && locals.user.id == post.user.id){ %>
+    <small>
+      <!-- ._id is same as .id (.id just converts the _id into string by mongoose)  -->
+      <a class="delete-post-button" href="/posts/destroy/<%=post._id%>"> X </a>
+    </small>
+    <% } %> <%= post.content %>
+    <br />
+    <small> <%= post.user.name %> </small>
+    <br />
+    <!-- display the likes of this post, if the user is logged in, then show the link to toggle likes, else, just show the count -->
+    <small>
+      <% if (locals.user) { %>
+      <a
+        href="/likes/toggle?id=<%=post._id%>&type=Post"
+        class="toggle-like-button"
+        data-likes="<%= post.likes.length %>"
+      >
+        <%= post.likes.length %> Likes
+      </a>
 
-                <% } else { %>
-                        <%= post.likes.length %> Likes
-                <% } %>
-            </small>
+      <% } else { %> <%= post.likes.length %> Likes <% } %>
+    </small>
+  </p>
 
+  <div class="post-comments">
+    <% if(locals.user){ %>
 
-    </p>
-    
+    <form
+      action="/comments/create"
+      id="post-<%=post._id%>-comments-form"
+      method="POST"
+      required
+    >
+      <input
+        type="text"
+        name="content"
+        placeholder="Type here to add comment..."
+      />
+      <input type="hidden" name="post" value="<%= post._id %>" />
+      <input type="submit" value="Add Comment" />
+    </form>
 
-    <div class="post-comments">
-            <% if(locals.user){ %> 
-    
-                    <form action="/comments/create" id="post-<%=post._id%>-comments-form" method="POST" required>
-                            <input type="text" name="content" placeholder="Type here to add comment...">
-                            <input type="hidden" name="post" value="<%= post._id %>">
-                            <input type="submit" value="Add Comment">
-                    </form>
-    
-            <% } %> 
+    <% } %>
 
-            <div id="post-comments-list">
-                    <ul id="post-comments-<%=post._id%>">
-                            
-                            <% for (comment of post.comments){ %>
-
-                                <%- include('_comment') %> 
-
-                            <% } %> 
-                    
-                    </ul>
-
-            </div>
-
+    <div id="post-comments-list">
+      <ul id="post-comments-<%=post._id%>">
+        <% for (comment of post.comments){ %> <%- include('_comment') %> <% } %>
+      </ul>
     </div>
-
+  </div>
 </li>

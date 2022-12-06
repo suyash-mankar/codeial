@@ -1,35 +1,35 @@
-const { json } = require('express');
-const mongoose = require('mongoose');
+const { json } = require("express");
+const mongoose = require("mongoose");
 
-
-const postSchema = new mongoose.Schema({
+const postSchema = new mongoose.Schema(
+  {
     content: {
-        type: String,
-        reuired: true
+      type: String,
+      reuired: true,
     },
     user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
     },
     //include the array of all ids of all comments in the post schema itself
-    comments : [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Comment'
-        }
+    comments: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Comment",
+      },
     ],
     likes: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Like'
-        }
-    ]
-}, {
-    timestamps: true
-});
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Like",
+      },
+    ],
+  },
+  {
+    timestamps: true,
+  }
+);
 
-
-
-const Post = mongoose.model('Post', postSchema);
+const Post = mongoose.model("Post", postSchema);
 
 module.exports = Post;

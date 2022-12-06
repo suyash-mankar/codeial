@@ -1,71 +1,64 @@
 <html>
-    <head>
-        <title>
-            <%= title %>
-        </title>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js" integrity="sha512-lOrm9FgT1LKOJRUXF3tp6QaMorJftUjowOWiDcG5GFZ/q7ukof19V0HKx/GWzXCdt9zYju3/KhBNdCLzK8b90Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="<%= assetPath('css/layout.css') %> ">
-        <link rel="stylesheet" href="<%= assetPath('css/header.css') %> ">
-        <link rel="stylesheet" href="<%= assetPath('css/footer.css') %>">
-        <link rel="stylesheet" href="<%= assetPath('css/chat_box.css') %>">
+  <head>
+    <title><%= title %></title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css"
+    />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"
+      integrity="sha512-lOrm9FgT1LKOJRUXF3tp6QaMorJftUjowOWiDcG5GFZ/q7ukof19V0HKx/GWzXCdt9zYju3/KhBNdCLzK8b90Q=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://code.jquery.com/jquery-3.6.1.min.js"
+      integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="<%= assetPath('css/layout.css') %> " />
+    <link rel="stylesheet" href="<%= assetPath('css/header.css') %> " />
+    <link rel="stylesheet" href="<%= assetPath('css/footer.css') %>" />
+    <link rel="stylesheet" href="<%= assetPath('css/chat_box.css') %>" />
 
-        
-        <%- style %>
-    </head>
-    <body>
-        
-        <%- include('_header'); %> 
+    <%- style %>
+  </head>
+  <body>
+    <%- include('_header'); %>
 
-        
+    <main id="layout-main"><%- body %></main>
 
-        <main id="layout-main">
-            <%- body %> 
-        </main>
-        
+    <%- include('_footer'); %> <%- script %>
 
-        <%- include('_footer'); %> 
+    <script>
 
-        <%- script %>
+      <% if (flash.success && flash.success.length>0) { %>
 
-        <script>
+          new Noty({
 
-            <% if (flash.success && flash.success.length>0) { %>
-                
-                new Noty({
+              theme: 'relax',
+              text: "<%= flash.success %>",
+              type: 'success',
+              layout: 'topRight',
+              timeout: 1500
 
-                    theme: 'relax',
-                    text: "<%= flash.success %>",
-                    type: 'success',
-                    layout: 'topRight',
-                    timeout: 1500
-                    
-                }).show();
+          }).show();
 
-            <% } %>
+      <% } %>
 
+      <% if (flash.error && flash.error.length>0) { %>
 
-            <% if (flash.error && flash.error.length>0) { %>
-                
-                new Noty({
+          new Noty({
 
-                    theme: 'relax',
-                    text: "<%= flash.error %>",
-                    type: 'error',
-                    layout: 'topRight',
-                    timeout: 1500
-                    
-                }).show();
+              theme: 'relax',
+              text: "<%= flash.error %>",
+              type: 'error',
+              layout: 'topRight',
+              timeout: 1500
 
-            <% } %>
+          }).show();
 
-
-        </script>
-
-
-   
-
-
-    </body>
+      <% } %>
+    </script>
+  </body>
 </html>

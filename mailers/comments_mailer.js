@@ -1,25 +1,28 @@
-// const nodemailer = require('../config/nodemailer');
+const nodemailer = require("../config/nodemailer");
 
+// Create a function to send the mail
 
-// // Create a function to send the mail
+//  This is another way of exporting a method
+exports.newComment = (comment) => {
+  let htmlString = nodemailer.renderTemplate(
+    { comment: comment },
+    "/comments/new_comment.ejs"
+  );
 
-// //  This is another way of exporting a method
-// exports.newComment = (comment) => {
-
-//     let htmlString = nodemailer.renderTemplate({comment: comment}, '/comments/new_comment.ejs');
-
-//     nodemailer.transporter.sendMail({
-//         from: 'facebooklite.tech@gmail.com',
-//         to: comment.user.email,
-//         subject: "new comment published",
-//         html: htmlString
-//     }, (err, info) => {
-//         if(err){
-//             console.log('Error in sending mail', err);
-//             return;
-//         }
-//         // console.log('Mail delivered', info);
-//         return;
-//     });
-            
-// }
+  nodemailer.transporter.sendMail(
+    {
+      from: "facebooklite.tech@gmail.com",
+      to: comment.user.email,
+      subject: "new comment published",
+      html: htmlString,
+    },
+    (err, info) => {
+      if (err) {
+        console.log("Error in sending mail", err);
+        return;
+      }
+      console.log("Mail delivered", info);
+      return;
+    }
+  );
+};
