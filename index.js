@@ -3,13 +3,6 @@ const env = require("./config/environment");
 const logger = require("morgan");
 const cors = require("cors");
 
-// const https = require('https');
-// const fs = require('fs');
-// const options = {
-//     key: fs.readFileSync('facecopy.tech.key'),
-//     cert: fs.readFileSync('facecopy.tech.cert')
-//   };
-
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const app = express();
@@ -104,17 +97,6 @@ app.use(customMware.setFlash);
 //use express router
 //any request that comes in, require the index.js of routes
 app.use("/", require("./routes"));
-
-// const server = https.createServer(options, app);
-
-// server.listen(port, function(err){
-//     if(err){
-//         // console.log('Error', err);
-//         console.log(`Error in running the server: ${err}`); //Interpolation
-//     }
-//     console.log(`server is running on port: ${port}`);
-
-// })
 
 const server = app.listen(port, function (err) {
   if (err) {

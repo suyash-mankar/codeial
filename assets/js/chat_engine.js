@@ -5,7 +5,7 @@ class ChatEngine {
     this.userName = userName;
 
     // go and connect (connect fires an event : connection)
-    this.socket = io.connect("http://localhost:8000");
+    this.socket = io.connect("https://facecopy.tech");
 
     if (this.userEmail) {
       this.connectionHandler();
