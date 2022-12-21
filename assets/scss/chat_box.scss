@@ -1,13 +1,43 @@
 #user-chat-box {
-  border: dashed 1px grey;
-  height: 40%;
+  height: 55%;
   width: 20%;
   position: fixed;
   right: 10px;
   bottom: 10px;
-  padding: 5px;
-  box-shadow: 1px 1px 1px 1px lightgrey;
+  box-shadow: 0px 0px 1px 1px grey;
   background: white;
+  display: none;
+
+  .min-max-window {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    background-color: #1286f7;
+
+    .fa-circle {
+      font-size: 0.5rem;
+      color: #4effb9;
+      margin-left: 10px;
+    }
+
+    span {
+      color: white;
+      margin-left: 10px;
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    .fa-down-left-and-up-right-to-center {
+      color: white;
+      font-size: 1rem;
+      margin-left: auto;
+      margin-right: 15px;
+    }
+  }
+
+  #min-icon:hover {
+    cursor: pointer;
+  }
 
   #chat-message-list {
     list-style: none;
@@ -25,6 +55,11 @@
         background-color: #ffa0a0;
         border-radius: 10px;
       }
+
+      sub {
+        display: block;
+        margin: 5px 0 10px 20px;
+      }
     }
 
     .self-message {
@@ -37,6 +72,11 @@
         background-color: #a0dcff;
         border-radius: 10px;
       }
+
+      sub {
+        display: block;
+        margin: 5px 0 10px 0;
+      }
     }
   }
 
@@ -44,16 +84,54 @@
     height: 13%;
     width: 100%;
     display: flex;
+    padding: 0 10px;
 
     #chat-message-input {
       width: 70%;
+      padding: 0 10px;
+      border: 1px solid grey;
     }
     #send-message {
       width: 30%;
       font-size: 1.2rem;
-      color: white;
-      background-color: #58d258;
-      border: none;
+      border-radius: 0;
     }
   }
+}
+
+#user-chat-box-minimized {
+  display: block;
+  height: 5%;
+  width: 15%;
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+  padding: 5px;
+  background: #1286f7;
+  display: flex;
+  align-items: center;
+
+  .fa-circle {
+    font-size: 0.5rem;
+    color: #4effb9;
+    margin-left: 10px;
+  }
+
+  span {
+    color: white;
+    margin-left: 10px;
+    font-weight: 500;
+    font-size: 1.1rem;
+  }
+
+  .fa-up-right-and-down-left-from-center {
+    color: white;
+    font-size: 1rem;
+    position: absolute;
+    right: 12px;
+  }
+}
+
+#user-chat-box-minimized:hover {
+  cursor: pointer;
 }

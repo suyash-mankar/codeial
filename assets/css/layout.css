@@ -1,5 +1,5 @@
 body {
-  margin: 0; }
+  margin: 0;
+  background-color: #f0f2f5; }
   body #layout-main {
-    height: 100%;
-    overflow: auto; }
+    height: auto; }

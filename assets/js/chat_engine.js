@@ -1,7 +1,8 @@
 class ChatEngine {
-  constructor(chatBoxId, userEmail) {
+  constructor(chatBoxId, userEmail, userName) {
     this.chatBox = $(`#${chatBoxId}`);
     this.userEmail = userEmail;
+    this.userName = userName;
 
     // go and connect (connect fires an event : connection)
     this.socket = io.connect("http://localhost:8000");
@@ -20,6 +21,7 @@ class ChatEngine {
 
       self.socket.emit("join_room", {
         user_email: self.userEmail,
+        user_name: self.userName,
         chatroom: "codeial",
       });
 
@@ -36,6 +38,7 @@ class ChatEngine {
         self.socket.emit("send_message", {
           message: msg,
           user_email: self.userEmail,
+          user_name: self.userName,
           chatroom: "codeial",
         });
       }
@@ -60,7 +63,7 @@ class ChatEngine {
 
       newMessage.append(
         $("<sub>", {
-          html: data.user_email,
+          html: "-" + data.user_name,
         })
       );
 

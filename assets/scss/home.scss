@@ -1,39 +1,100 @@
 #home-container {
   display: flex;
-  height: 100%;
+  height: auto;
+
+  // posts section
   #feed-posts {
     width: 70%;
-    height: 80%;
-    padding: 10px;
+    height: auto;
+    padding: 40px 20px 0px 20px;
+    text-align: center;
+
+    #new-post-form {
+      width: 75%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-left: 13.8%;
+      margin-bottom: 0;
+      padding: 20px 30px 20px 10px;
+      background-color: white;
+      border-radius: 20px;
+      box-shadow: -0.5px 0.5px 1px 0.5px lightgrey;
+
+      textarea {
+        width: 90%;
+        border-radius: 20px;
+        padding: 7px 20px 0 20px;
+        font-size: 1.2rem;
+        height: 45px;
+        margin-right: 20px;
+        margin-left: 20px;
+        border: none;
+        background-color: #e4e6e9;
+      }
+
+      textarea:focus {
+        outline: none;
+      }
+
+      input {
+        font-size: 1.2rem;
+        padding: 6px 20px;
+      }
+    }
+
+    #posts-list-container {
+      margin: 50px 10%;
+      margin-left: 10%;
+      margin-top: 50px;
+      text-align: left;
+
+      ul {
+        list-style: none;
+      }
+    }
   }
 
+  // user friends section
   #users-friends {
     width: 30%;
-    border-left: 1px solid lightgrey;
-
-    h4,
-    p {
-      margin-left: 10px;
-    }
+    background-color: #f0f2f5;
 
     #friends {
       border-bottom: 1px solid lightgrey;
+      padding: 30px;
+
+      .user-name {
+        margin: 0;
+        padding: 8px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        color: black;
+        font-size: 1.1rem;
+        display: block;
+      }
+
+      .user-name:hover {
+        background-color: lightgrey;
+      }
+    }
+
+    #users {
+      padding: 30px;
+
+      .user-name {
+        text-decoration: none;
+        color: black;
+        font-size: 1.1rem;
+        margin: 0;
+        padding: 8px 20px;
+        border-radius: 5px;
+        display: block;
+      }
+
+      .user-name:hover {
+        background-color: lightgrey;
+      }
     }
   }
 }
-
-// #home-container{
-//     display: flex;
-
-//     #feed-posts{
-//         width: 70%;
-//         padding: 10px;
-//     }
-
-//     #users-friends{
-//         width: 30%;
-//         padding: 10px;
-//         border-left: 1px solid lightgrey;
-//         height: 100%;
-//     }
-// }

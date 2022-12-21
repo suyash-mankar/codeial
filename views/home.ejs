@@ -2,19 +2,15 @@
 
 <div id="home-container">
   <section id="feed-posts">
-    <h4>Posts</h4>
-
     <% if(locals.user){ %>
 
     <form action="/posts/create" id="new-post-form" method="POST">
       <textarea
         name="content"
-        cols="30"
-        rows="3"
-        placeholder="Type Here..."
+        placeholder="What's on your mind, <%= locals.user.name %>?"
         required
       ></textarea>
-      <input type="submit" value="Post" />
+      <input type="submit" value="Post" class="btn btn-primary" />
     </form>
 
     <% } %>
@@ -38,29 +34,27 @@
       <% for(let u of friendships) {%>
       <!-- if the logged in user received the friend request -->
       <% if(locals.user.id==u.to_user._id){ %>
-      <p>
-        <!-- show the name of the person to who sent the request -->
-        <a href="/users/profile/<%=u.from_user._id%>">
+   
+        <!-- show the name of the person who sent the request -->
+        <a class="user-name" href="/users/profile/<%=u.from_user._id%>">
           <%= u.from_user.name %>
         </a>
-      </p>
+   
       <%}else{%>
       <!-- if the logged in user sent the friend request -->
-      <p>
+    
         <!-- show the name of the person to whom request was sent -->
-        <a href="/users/profile/<%=u.to_user._id%>"> <%= u.to_user.name %> </a>
-      </p>
+        <a class="user-name" href="/users/profile/<%=u.to_user._id%>">
+          <%= u.to_user.name %>
+        </a>
+  
       <%}%> <% } %> <% } %>
     </div>
 
     <div id="users">
       <h4>All Users</h4>
       <% for(let u of all_users) {%>
-
-      <p>
-        <a href="/users/profile/<%=u.id%>"><%= u.name %> </a>
-      </p>
-
+        <a class="user-name" href="/users/profile/<%=u.id%>"><%= u.name %> </a>
       <% } %>
     </div>
   </section>
@@ -90,6 +84,6 @@
 
 <% if (locals.user) { %>
 <script>
-  new ChatEngine("user-chat-box", "<%= locals.user.email %>");
+  new ChatEngine("user-chat-box", "<%= locals.user.email %>", "<%= locals.user.name %>");
 </script>
 <% } %>

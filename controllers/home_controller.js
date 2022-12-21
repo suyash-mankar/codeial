@@ -14,12 +14,14 @@ module.exports.home = async function (req, res) {
       .populate({
         path: "comments",
         // further populate
-        populate: {
-          path: "user",
-        },
-        populate: {
-          path: "likes",
-        },
+        populate: [
+          {
+            path: "user",
+          },
+          {
+            path: "likes",
+          },
+        ],
       })
       .populate("likes");
 

@@ -34,21 +34,45 @@
 
   // method to create post in DOM
   let newPostDom = function (post) {
-    return $(`<li id="post-${post._id}">
+    return $(`
+    
+    
+    <li id="post-${post._id}" class="posts-container">
                                 
         <p>     
             <small>
-                    <a class="delete-post-button" href="/posts/destroy/${post._id}"> X </a>
+                    <a class="delete-post-button  btn btn-outline-dark" href="/posts/destroy/${post._id}"> Delete Post </a>
             </small>
-            ${post.content}
+            <br />
+            <small class="user-name"> ${post.user.name} </small>
             <br>
-            <small> ${post.user.name} </small>
+            <small class="post-content"> ${post.content} </small>
             <br>
 
-            <small>
+            <small class="likes-comment-container" id="likes-comment-container">
                 <a href="/likes/toggle?id=${post._id}&type=Post" class="toggle-like-button" data-likes="0">
-                        0 Likes     
+                        
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/512/889/889140.png"
+                    alt="like"
+                  />
+                  
+                  0 Likes     
                 </a>
+
+                <img
+                  src="https://cdn-icons-png.flaticon.com/512/2190/2190552.png"
+                  alt="like"
+                  style="width: 18px; margin: 0 10px; margin-top: 2px"
+                />
+
+
+                <span id="post-comments-length-${post._id}" data-comments="${post.comments.length}">
+                  ${post.comments.length} Comments
+                </span>
+
+
+                
             </small>
 
         </p>
@@ -56,7 +80,7 @@
         <div class="post-comments">
         
             <form action="/comments/create" id="post-${post._id}-comments-form" method="POST" required>
-                    <input type="text" name="content" placeholder="Type here to add comment...">
+                    <input class="write-comment" type="text" name="content" placeholder="Write a comment...">
                     <input type="hidden" name="post" value="${post._id}">
                     <input type="submit" value="Add Comment">
             </form>

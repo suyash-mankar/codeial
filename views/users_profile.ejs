@@ -1,49 +1,72 @@
-<link rel="stylesheet" href="/css/user_profile.css" />
-
-<img
-  src="<%= profile_user.avatar %> "
-  alt="<%= profile_user.name %>"
-  width="100"
-/>
+<link rel="stylesheet" href="<%= assetPath('css/user_profile.css') %>" />
 
 <% if (user.id == profile_user.id) { %>
-<!-- if user matches then show the form  -->
-<form
-  action="/users/update/<%=profile_user.id%>"
-  enctype="multipart/form-data"
-  method="POST"
->
-  <input
-    type="text"
-    name="name"
-    placeholder="Your Name"
-    value="<%= profile_user.name %>"
-    required
-  />
-  <input
-    type="email"
-    name="email"
-    placeholder="Your Email"
-    value="<%= profile_user.email %>"
-    required
-  />
-  <input type="file" name="avatar" placeholder="Profile Picture" />
 
-  <input type="submit" value="update" />
-</form>
+<div class="self-profile-container">
+  <!-- user details -->
+  <h2>User Profile</h2>
+
+  <img
+    src="<%= profile_user.avatar %> "
+    alt="<%= profile_user.name %>"
+    width="100"
+  />
+
+  <p style="font-weight: 500">Update profile picture</p>
+
+  <form
+    action="/users/update/<%=profile_user.id%>"
+    enctype="multipart/form-data"
+    method="POST"
+  >
+    <label for="name">Name</label>
+    <input
+      type="text"
+      style="border: 1px solid grey"
+      name="name"
+      placeholder="Your Name"
+      value="<%= profile_user.name %>"
+      required
+    />
+    <label for="email">Email</label>
+    <input
+      type="email"
+      style="border: 1px solid grey"
+      name="email"
+      placeholder="Your Email"
+      value="<%= profile_user.email %>"
+      required
+    />
+    <input type="file" name="avatar" placeholder="Profile Picture" />
+
+    <input type="submit" class="btn btn-primary" value="update" />
+  </form>
+</div>
 
 <% } else { %>
 <!-- else show only the profile info -->
-<p><%= profile_user.name %></p>
-<p><%= profile_user.email %></p>
 
-<!-- show Add Friend/ Remove Friend if the logged in user open someone else's profile -->
-<a
-  href="/friendship/toggle/?profileId=<%=profile_user.id%>"
-  class="toggle-friendship"
->
-  <%= friendship_status %>
-</a>
+<div class="other-user-profile-container">
+  <!-- user details -->
+  <h2>User Profile</h2>
+
+  <img
+    src="<%= profile_user.avatar %> "
+    alt="<%= profile_user.name %>"
+    width="100"
+  />
+
+  <p>Name : <%= profile_user.name %></p>
+  <p>Email : <%= profile_user.email %></p>
+
+  <!-- show Add Friend/ Remove Friend if the logged in user open someone else's profile -->
+  <a
+    href="/friendship/toggle/?profileId=<%=profile_user.id%>"
+    class="toggle-friendship btn btn-primary"
+  >
+    <%= friendship_status %>
+  </a>
+</div>
 
 <% } %>
 

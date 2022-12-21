@@ -27,7 +27,13 @@ class ToggleLike {
           }
 
           $(self).attr("data-likes", likesCount);
-          $(self).html(`${likesCount} Likes`);
+          $(self).html(`
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/889/889140.png"
+              alt="like"
+            />
+            ${likesCount} Likes
+          `);
         })
         .fail(function (errData) {
           console.log("error in completing the request", errData);

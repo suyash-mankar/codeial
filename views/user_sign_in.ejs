@@ -1,21 +1,69 @@
-<h1>Sign In</h1>
+<link rel="stylesheet" href="<%= assetPath('css/user_sign_in.css') %>" />
 
-<form action="/users/create-session" method="POST">
+<div class="login-form-container">
+  <h1>Sign In</h1>
 
-    <input type="email" name="email" placeholder="Email" required>
-    <input type="password" name="password" placeholder="Password" required>
-    <input type="submit" value="Sign In">
+  <!-- login using google -->
+  <a href="/users/auth/google" class="btn btn-outline-dark">
+    <img
+      src="https://cdn-icons-png.flaticon.com/512/300/300221.png"
+      alt="google-logo"
+    />
+    Log in with Google
+  </a>
 
-</form>
+  <div class="or-container">
+    <hr />
+    <span> Or </span>
+    <hr />
+  </div>
 
-<p>
-    <a href="/users/auth/google"> Google Sign In/Sign Up </a>
-</p>
+  <!-- login form -->
+  <form id="login-form" action="/users/create-session" method="POST">
+    <label for="email"> Email </label>
+    <input
+      id="login-email"
+      type="email"
+      name="email"
+      placeholder="Enter Your Email"
+      required
+    />
+    <label for="password"> Password </label>
+    <input
+      id="login-password"
+      type="password"
+      name="password"
+      placeholder="Password"
+      required
+    />
 
+    <input
+      id="signin-submit-btn"
+      type="submit"
+      class="btn btn-primary"
+      value="Sign In"
+    />
+  </form>
 
-<form action="/users/create-reset-password-token" method="POST">
+  <p style="margin-bottom: 5px; color: blue">Forgot Password ?</p>
 
-    <input type="email" name="email" placeholder="email" required>
-    <input type="submit" value="Forgot password">
-
-</form>
+  <!-- forgot password -->
+  <form
+    class="forgot-password-form"
+    action="/users/create-reset-password-token"
+    method="POST"
+  >
+    <input
+      class="email-input"
+      type="email"
+      name="email"
+      placeholder="email"
+      required
+    />
+    <input
+      class="forgot-password-btn btn btn-outline-dark"
+      type="submit"
+      value="reset password"
+    />
+  </form>
+</div>

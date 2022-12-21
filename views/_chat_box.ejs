@@ -1,6 +1,12 @@
 <% if (locals.user) { %>
 
 <div id="user-chat-box">
+  <div class="min-max-window">
+    <i class="fa-solid fa-circle"></i>
+    <span>Chat</span>
+    <i id="min-icon" class="fa-solid fa-down-left-and-up-right-to-center"></i>
+  </div>
+
   <ul id="chat-message-list">
     <li class="other-message">
       <span>Other message</span>
@@ -15,7 +21,28 @@
       id="chat-message-input"
       placeholder="Type message here"
     />
-    <button id="send-message">Send</button>
+    <button class="btn btn-primary" id="send-message">Send</button>
   </div>
 </div>
+
+<div id="user-chat-box-minimized">
+  <i class="fa-solid fa-circle"></i>
+  <span>Chat</span>
+  <i class="fa-solid fa-up-right-and-down-left-from-center"></i>
+</div>
+
+<script>
+  let minChatBox = $("#user-chat-box-minimized");
+  minChatBox.click(function () {
+    minChatBox.css("display", "none");
+    $("#user-chat-box").css("display", "block");
+  });
+
+  let minIcon = $("#min-icon");
+  minIcon.click(function () {
+    $("#user-chat-box").css("display", "none");
+    minChatBox.css("display", "flex");
+  });
+</script>
+
 <% } %>

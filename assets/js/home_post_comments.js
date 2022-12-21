@@ -17,7 +17,7 @@ class PostComments {
 
     // call for all the existing comments
     $(" .delete-comment-button", this.postContainer).each(function () {
-      self.deleteComment($(this));
+      self.deleteComment($(this), postId);
     });
   }
 
@@ -34,10 +34,23 @@ class PostComments {
         success: function (data) {
           let newComment = pSelf.newCommentDom(data.data.comment);
           $(`#post-comments-${postId}`).prepend(newComment);
-          pSelf.deleteComment($(" .delete-comment-button", newComment));
+          pSelf.deleteComment($(" .delete-comment-button", newComment), postId);
 
           // enable the functionality of the toggle like button on the new comment
           new ToggleLike($(" .toggle-like-button", newComment));
+
+          // change the number of comments in posts, when a comment is created
+          let commentsCount = parseInt(
+            $(`#post-comments-length-${postId}`).attr("data-comments")
+          );
+          commentsCount += 1;
+          $(`#post-comments-length-${postId}`).attr(
+            "data-comments",
+            commentsCount
+          );
+          $(`#post-comments-length-${postId}`).html(`
+            ${commentsCount} Comments
+          `);
 
           new Noty({
             theme: "relax",
@@ -56,30 +69,32 @@ class PostComments {
 
   newCommentDom(comment) {
     // added a class 'delete-comment-button' to the delete comment link and also id to the comment's li
-    return $(`<li id="comment-${comment._id}">
-                        <p>
-                            
-                            <small>
-                                <a class="delete-comment-button" href="/comments/destroy/${comment._id}">X</a>
-                            </small>
-                            
-                            ${comment.content}
-                            <br>
-                            <small>
-                                ${comment.user.name}
-                            </small>
-                            <br>
-                            <small>
-                                <a href="/likes/toggle?id=${comment._id}&type=Comment" class="toggle-like-button" data-likes="0">
-                                        0 Likes     
-                                </a>
-                             </small>
-                        </p>    
+    return $(`<li id="comment-${comment._id}" class="comments-container">
+                <p>
+                  <small>
+                      <a class="delete-comment-button btn btn-outline-dark" href="/comments/destroy/${comment._id}">X</a>
+                  </small>
 
-                </li>`);
+                  <small class="user-name">
+                      ${comment.user.name}
+                  </small>
+                  
+                  ${comment.content}
+                  <br>
+                  <small>
+                      <a href="/likes/toggle?id=${comment._id}&type=Comment" class="toggle-like-button" data-likes="0">
+                        <img
+                          src="https://cdn-icons-png.flaticon.com/512/889/889140.png"
+                          alt="like"
+                        />    
+                        0 Likes     
+                      </a>
+                  </small>
+                </p>    
+        </li>`);
   }
 
-  deleteComment(deleteLink) {
+  deleteComment(deleteLink, postId) {
     $(deleteLink).click(function (e) {
       e.preventDefault();
 
@@ -88,6 +103,19 @@ class PostComments {
         url: $(deleteLink).prop("href"),
         success: function (data) {
           $(`#comment-${data.data.comment_id}`).remove();
+
+          // change the number of comments in posts, when a comment is created
+          let commentsCount = parseInt(
+            $(`#post-comments-length-${postId}`).attr("data-comments")
+          );
+          commentsCount -= 1;
+          $(`#post-comments-length-${postId}`).attr(
+            "data-comments",
+            commentsCount
+          );
+          $(`#post-comments-length-${postId}`).html(`
+            ${commentsCount} Comments
+          `);
 
           new Noty({
             theme: "relax",
