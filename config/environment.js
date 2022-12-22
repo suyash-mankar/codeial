@@ -22,7 +22,7 @@ const development = {
     secure: false,
     auth: {
       user: "facebooklite.tech@gmail.com",
-      pass: "get this from google account",
+      pass: process.env.CODEIAL_GMAIL_PASSWORD,
     },
   },
   google_client_id:

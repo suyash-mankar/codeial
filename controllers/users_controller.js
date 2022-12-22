@@ -189,6 +189,7 @@ module.exports.resetPasswordPage = async function (req, res) {
     accessToken: req.params.accesstoken,
   });
 
+
   if (resetPasswordToken.isValid) {
     return res.render("reset_password", {
       title: "Reset Password",
